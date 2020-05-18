@@ -49,7 +49,7 @@ public class EyesSaver extends AnAction {
                     public void run() {
                         Notification notification = GROUP_DISPLAY_ID_INFO.createNotification(message, NotificationType.INFORMATION);
                         Project[] projects = ProjectManager.getInstance().getOpenProjects();
-                        notification.setTitle("Prova");
+                        notification.setTitle("Eyes Saver");
                         notification.setIcon(PluginIcons.EYEICON);
                         notification.addAction(new AnAction() {
                             @Override

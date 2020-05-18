@@ -2372,11 +2372,15 @@
       "event_data" : {
         "component" : [ "{util#component_name}" ],
         "name" : [ "{util#option_name}" ],
-        "type" : [ "bool", "int", "float", "{enum:bool|int|float}" ],
-        "value" : [ "{enum#boolean}", "{regexp#integer}", "{regexp#float}" ]
+        "plugin" : [ "{util#plugin}" ],
+        "plugin_type" : [ "{util#plugin_type}" ],
+        "plugin_version" : [ "{util#plugin_version}" ],
+        "type" : [ "bool", "int", "float", "{enum:bool|int|float}", "{enum#__type}" ],
+        "value" : [ "{enum#boolean}", "{regexp#integer}", "{regexp#float}", "{util#setting_value}" ]
       },
       "enums" : {
-        "_" : [ "GeneralSettings", "NotRoamableUiSettings", "UISettings", "PhpDebugGeneral", "PhpRefactoringSettings", "not.default", "invoked" ]
+        "_" : [ "GeneralSettings", "NotRoamableUiSettings", "UISettings", "PhpDebugGeneral", "PhpRefactoringSettings", "not.default", "invoked" ],
+        "__type" : [ "bool", "int", "float", "enum", "string" ]
       }
     }
   }, {
@@ -2501,14 +2505,16 @@
       "from" : "191.4738"
     } ],
     "rules" : {
-      "event_id" : [ "{enum#os}", "{enum:os.timezone|os.name}" ],
+      "event_id" : [ "{enum#os}", "{enum:os.name|os.timezone}" ],
       "event_data" : {
         "name" : [ "{enum#os}" ],
-        "release" : [ "{enum#linux}" ],
+        "release" : [ "{enum#linux}", "{enum#__release}" ],
         "value" : [ "{regexp#time_zone}", "{enum:Z}" ],
-        "version" : [ "{regexp#version}", "{enum:unknown.format}" ]
+        "version" : [ "{regexp#version}", "{enum:unknown.format}", "{enum#__version}" ]
       },
       "enums" : {
+        "__release" : [ "unknown", "alpine", "amzn", "antergos", "arch", "centos", "debian", "deepin", "elementary", "fedora", "galliumos", "gentoo", "kali", "linuxmint", "manjaro", "neon", "nixos", "ol", "opensuse", "opensuse-leap", "opensuse-tumbleweed", "freedesktop", "parrot", "raspbian", "rhel", "sabayon", "solus", "ubuntu", "zorin", "custom" ],
+        "__version" : [ "6.0", "6.1", "6.2", "6.3", "10.0" ],
         "linux" : [ "unknown", "alpine", "amzn", "antergos", "arch", "centos", "debian", "deepin", "elementary", "fedora", "galliumos", "gentoo", "kali", "linuxmint", "manjaro", "neon", "nixos", "ol", "opensuse", "opensuse-leap", "opensuse-tumbleweed", "freedesktop", "parrot", "raspbian", "rhel", "sabayon", "solus", "ubuntu", "zorin", "custom" ]
       },
       "regexps" : {
@@ -3189,5 +3195,5 @@
       "version" : "(\\d+\\.?)*\\d+"
     }
   },
-  "version" : "1258"
+  "version" : "1260"
 }

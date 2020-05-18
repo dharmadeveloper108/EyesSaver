@@ -11,7 +11,9 @@
     A simple plugin to remind you to look away from the screen after 2 hours of work.
     </description>
   <depends>com.intellij.modules.platform</depends>
-  <extensions defaultExtensionNs="com.intellij"/>
+  <extensions defaultExtensionNs="com.intellij">
+    <themeProvider id="6afe21b2-c651-4a03-a889-556d099724d4" path="/eyes_saver.theme.json"/>
+  </extensions>
   <actions>
     <group id="EyesSaver.TopMenu" text="_TopMenu" description="Eyes Saver main class">
       <add-to-group group-id="MainMenu" anchor="last"/>
