@@ -1,0 +1,21 @@
+<idea-plugin>
+  <version>1.0-SNAPSHOT</version>
+  <change-notes>
+      Add change notes here.&lt;br&gt;
+      &lt;em&gt;most HTML tags may be used&lt;/em&gt;</change-notes>
+  <idea-version since-build="193.5662" until-build="193.*"/>
+  <id>com.francescaidarocci.EyesSaver</id>
+  <name>Eyes Saver</name>
+  <vendor email="francescaida.rocci@gmail.com" url="http://www.francescaidarocci.com">Self</vendor>
+  <description>
+    A simple plugin to remind you to look away from the screen after 2 hours of work.
+    </description>
+  <depends>com.intellij.modules.platform</depends>
+  <extensions defaultExtensionNs="com.intellij"/>
+  <actions>
+    <group id="EyesSaver.TopMenu" text="_TopMenu" description="Eyes Saver main class">
+      <add-to-group group-id="MainMenu" anchor="last"/>
+      <action id="EyesSaver" class="EyesSaver" text="_EyesSaver" description="Eyes saver"/>
+    </group>
+  </actions>
+</idea-plugin>

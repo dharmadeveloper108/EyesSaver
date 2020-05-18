@@ -1,0 +1,9 @@
+{
+  "name": "eyes_saver",
+  "dark": true,
+  "author": "dharmadev",
+  "editorScheme": "/eyes_saver.xml",
+  "ui": {
+    "basicBackground": "#777777"
+  }
+}
