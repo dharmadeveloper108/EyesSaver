@@ -9,8 +9,8 @@ public class ShowNotification extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         DialogBuilder dialogBuilder = new DialogBuilder();
         dialogBuilder.setDimensionServiceKey("whatever");
-        dialogBuilder.setTitle("Hi");
-        dialogBuilder.setErrorText("Protect you eyes BYE");
+        dialogBuilder.setTitle("Eyes Saver");
+        dialogBuilder.setErrorText("Look away from the screen, ideally 20 feet away, for 20 seconds.");
         dialogBuilder.removeAllActions();
         dialogBuilder.addOkAction();
         dialogBuilder.addCancelAction();

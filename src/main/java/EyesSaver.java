@@ -1,3 +1,5 @@
+import com.intellij.diagnostic.ReportMessages;
+import com.intellij.ide.browsers.BrowserLauncher;
 import com.intellij.notification.*;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -15,6 +17,7 @@ import com.intellij.ui.awt.RelativePoint;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,14 +27,21 @@ public class EyesSaver extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        showMyMessage("Protect you eyes BYE");
+        String message = "<html>\n" +
+                " You have looked at the screen for two hours. Time to rest your eyes!" +
+                "  <a href=''" +
+                ">OK I am ready</a>\n" +
+                "</html>";
+
+        showMyMessage(message);
+
     }
 
     Timer timer = new Timer();
     int begin = 0;
     int timeInterval = 10000;
 
-    public static final NotificationGroup GROUP_DISPLAY_ID_INFO =
+    public static final NotificationGroup notification_group =
             new NotificationGroup("My notification group",
                     NotificationDisplayType.STICKY_BALLOON, true);
 
@@ -41,33 +51,32 @@ public class EyesSaver extends AnAction {
             @Override
             public void run() {
 
-
-
-
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Notification notification = GROUP_DISPLAY_ID_INFO.createNotification(message, NotificationType.INFORMATION);
+
+
+
+                        Notification notification = notification_group.createNotification(message, "",
+                                NotificationType.INFORMATION,
+                                new NotificationListener() {
+                                    @Override
+                                    public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
+
+                                        String alert = "Look away from the screen, ideally 20 feet away, for 20 seconds.";
+                                        fireDialog(alert);
+
+                                    }
+                                });
                         Project[] projects = ProjectManager.getInstance().getOpenProjects();
                         notification.setTitle("Eyes Saver");
                         notification.setIcon(PluginIcons.EYEICON);
-                        notification.addAction(new AnAction() {
-                            @Override
-                            public void actionPerformed(@NotNull AnActionEvent e) {
-                                DialogBuilder dialogBuilder = new DialogBuilder();
-                                dialogBuilder.setDimensionServiceKey("whatever");
-                                dialogBuilder.setTitle("Hi");
-                                dialogBuilder.setErrorText("Protect you eyes BYE");
-                                dialogBuilder.removeAllActions();
-                                dialogBuilder.addOkAction();
-                                dialogBuilder.addCancelAction();
 
-                                boolean isOk = dialogBuilder.show() == DialogWrapper.OK_EXIT_CODE;
-                                if(isOk) {
-                                    dialogBuilder.dispose();
-                                }
-                            }
-                        });
+//                        ShowNotification showNotification = new ShowNotification();
+//                        showNotification.displayTextInToolbar();
+//
+//                        notification.addAction(showNotification);
+                        notification.setContent(message);
                         Notifications.Bus.notify(notification, projects[0]);
 
                         //new NotificationDialog().showAndGet();
@@ -82,19 +91,21 @@ public class EyesSaver extends AnAction {
     }
 
 
-//    public void showDialog() {
-//        DialogBuilder dialogBuilder = new DialogBuilder();
-//        //dialogBuilder.setDimensionServiceKey("whatever");
-//        dialogBuilder.setTitle("Hi");
-//        dialogBuilder.setErrorText("Protect you eyes BYE");
-//        dialogBuilder.removeAllActions();
-//        dialogBuilder.addOkAction();
-//        dialogBuilder.addCancelAction();
-//
-//        boolean isOk = dialogBuilder.show() == DialogWrapper.OK_EXIT_CODE;
-//        if(isOk) {
-//            dialogBuilder.dispose();
-//        }
-//    }
+    void fireDialog(String dialogMessage) {
+
+        DialogBuilder dialogBuilder = new DialogBuilder();
+        dialogBuilder.setDimensionServiceKey("whatever");
+        dialogBuilder.setTitle("Eyes Saver");
+        dialogBuilder.setErrorText(dialogMessage);
+        dialogBuilder.removeAllActions();
+        dialogBuilder.addOkAction();
+        dialogBuilder.addCancelAction();
+
+        boolean isOk = dialogBuilder.show() == DialogWrapper.OK_EXIT_CODE;
+        if(isOk) {
+            dialogBuilder.dispose();
+        }
+    }
+
 
 }
