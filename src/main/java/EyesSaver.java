@@ -6,7 +6,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.ui.JBSplitter;
 import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,7 +46,7 @@ public class EyesSaver extends AnAction {
 
     // every 2 hours
     int timeInterval_2hrs = ((1000 * 60) * 60) * 2;
-    int begin_2hrs = timeInterval_20min;
+    int begin_2hrs = timeInterval_2hrs;
 
     public static final NotificationGroup notification_group =
             new NotificationGroup("EyesSaver notification group",
@@ -55,8 +62,7 @@ public class EyesSaver extends AnAction {
                         NotificationType.INFORMATION,
                         (notification1, event) -> {
 
-                            String alert = "Look away from the screen, ideally 20 feet away, for 20 seconds.";
-                            fireDialog_20mins(alert);
+                            fireDialog_20mins();
 
                         });
                 Project[] projects = ProjectManager.getInstance().getOpenProjects();
@@ -65,9 +71,9 @@ public class EyesSaver extends AnAction {
 
                 notification.setContent(message);
                 Notifications.Bus.notify(notification, projects[0]);
-
             }
-        }, begin_20min, timeInterval_20min));
+        }, 0, 10000));
+
 
     }
 
@@ -88,14 +94,29 @@ public class EyesSaver extends AnAction {
         },begin_2hrs, timeInterval_2hrs));
     }
 
-    void fireDialog_20mins(String dialogMessage) {
-        DialogBuilder dialogBuilder = new DialogBuilder();
-        dialogBuilder.setDimensionServiceKey("whatever");
-        dialogBuilder.setTitle("Eyes Saver");
-        dialogBuilder.setErrorText(dialogMessage);
-        dialogBuilder.removeAllActions();
+    void fireDialog_20mins() {
+        //pressEscKey();
+        NotificationDialog notificationDialog = new NotificationDialog();
+        notificationDialog.show();
+        //notificationDialog.doValidate();
     }
 
+    public void pressEscKey() {
 
+        Timer timer = new Timer();
+        ApplicationManager.getApplication().invokeLater(() -> timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    Robot r = new Robot();
+                    int keyCode = KeyEvent.VK_ESCAPE; // escape key
+                    r.keyPress(keyCode);
+                } catch (AWTException e){
+
+                }
+            }
+        }, 0, 20000));
+
+    }
 
 }

@@ -624,6 +624,7 @@
         "error_ts" : [ "{regexp#integer}" ],
         "external" : [ "{enum#boolean}" ],
         "failed" : [ "{regexp#integer}" ],
+        "paths" : [ "{regexp#hash}" ],
         "send" : [ "{regexp#integer}" ],
         "send_ts" : [ "{regexp#integer}" ],
         "stage" : [ "{enum:LOADING|PARSING}" ],
@@ -660,8 +661,10 @@
     "rules" : {
       "event_id" : [ "{enum:file.opened|candidate.calculated}" ],
       "event_data" : {
+        "context_opened" : [ "{enum#boolean}" ],
         "excluded" : [ "{enum#boolean}" ],
         "features_computation" : [ "{regexp#integer}" ],
+        "features_ms" : [ "{regexp#integer}" ],
         "file_path" : [ "{util#hash}" ],
         "file_type" : [ "{util#file_type}" ],
         "history_bi_max" : [ "{regexp#float}" ],
@@ -685,12 +688,17 @@
         "plugin" : [ "{util#plugin}" ],
         "plugin_type" : [ "{util#plugin_type}" ],
         "plugin_version" : [ "{util#plugin_version}" ],
+        "predict_ms" : [ "{regexp#integer}" ],
         "prev_file_path" : [ "{regexp#hash}" ],
         "prev_file_type" : [ "{util#file_type}" ],
+        "probability" : [ "{regexp#float}" ],
         "refs_computation" : [ "{regexp#integer}" ],
+        "refs_ms" : [ "{regexp#integer}" ],
         "relative_path_prefix" : [ "{regexp#integer}" ],
         "same_dir" : [ "{enum#boolean}" ],
         "same_module" : [ "{enum#boolean}" ],
+        "session_id" : [ "{regexp#integer}" ],
+        "total_ms" : [ "{regexp#integer}" ],
         "vcs_in_changelist" : [ "{enum#boolean}" ],
         "vcs_prev_in_changelist" : [ "{enum#boolean}" ],
         "vcs_related_prob" : [ "{regexp#float}" ]
@@ -723,6 +731,7 @@
       "event_data" : {
         "file_path" : [ "{util#hash}" ],
         "file_type" : [ "{util#file_type}" ],
+        "is_writable" : [ "{enum#boolean}" ],
         "plugin" : [ "{util#plugin}" ],
         "plugin_type" : [ "{util#plugin_type}" ],
         "plugin_version" : [ "{util#plugin_version}" ],
@@ -3185,7 +3194,7 @@
     },
     "regexps" : {
       "count" : "\\d+K?M?\\+?",
-      "float" : "-?\\d+\\.\\d+",
+      "float" : "-?\\d+\\.\\d+(E\\-?\\d+)?",
       "hash" : "[0-9A-Fa-f]{40,64}",
       "integer" : "-?\\d+(\\+)?",
       "kotlin_version" : "\\d\\.\\d\\.\\d{1,3}-(dev|eap|release)-(\\d+-)?(AppCode|CLion|IJ|Studio)[0-9\\-\\.]+",
@@ -3195,5 +3204,5 @@
       "version" : "(\\d+\\.?)*\\d+"
     }
   },
-  "version" : "1261"
+  "version" : "1268"
 }
