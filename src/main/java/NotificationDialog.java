@@ -1,4 +1,4 @@
-import com.intellij.openapi.application.ApplicationManager;
+
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.ValidationInfo;
 import org.jetbrains.annotations.NotNull;
@@ -14,8 +14,6 @@ import javax.swing.Timer;
 
 public class NotificationDialog extends DialogWrapper {
     private JProgressBar progressBar;
-    public Timer timer;
-
     int k = 20;
     public NotificationDialog() {
         super(true); // use current window as parent
@@ -36,12 +34,22 @@ public class NotificationDialog extends DialogWrapper {
         return super.doValidate();
     }
 
+    int rep = 0;
     @Override
     protected @Nullable JComponent createCenterPanel() {
 
+        java.util.Timer t = new java.util.Timer();
+
+        t.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                        progressBar.setValue(rep);
+                        rep++;
+                }
+        },10, 1000);
+
         progressBar = new JProgressBar(0, 20);
         progressBar.setStringPainted(true);
-        progressBar.setValue(20);
 
         JPanel dialogPanel = new JPanel();
         String alertMessage = "Look 20 feet away from the screen for "+k+" seconds.";
@@ -58,6 +66,7 @@ public class NotificationDialog extends DialogWrapper {
     @Override
     protected Action[] createActions() {
         pressEscKey();
+
         super.createDefaultActions();
         return new Action[] {
                 getCancelAction()

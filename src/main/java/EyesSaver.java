@@ -4,16 +4,9 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.ui.DialogBuilder;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.ui.JBSplitter;
+
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,6 +33,7 @@ public class EyesSaver extends AnAction {
 
     Timer timer = new Timer();
     Timer timer1 = new Timer();
+
     // every 20 minutes
     int timeInterval_20min = (1000 * 60) * 20;
     int begin_20min = timeInterval_20min;
@@ -68,11 +62,10 @@ public class EyesSaver extends AnAction {
                 Project[] projects = ProjectManager.getInstance().getOpenProjects();
                 notification.setTitle("Eyes Saver");
                 notification.setIcon(PluginIcons.EYEICON);
-
                 notification.setContent(message);
                 Notifications.Bus.notify(notification, projects[0]);
             }
-        }, 0, 10000));
+        }, begin_20min, timeInterval_20min));
 
 
     }
@@ -87,7 +80,6 @@ public class EyesSaver extends AnAction {
                 Project[] projects = ProjectManager.getInstance().getOpenProjects();
                 notification.setTitle("Eyes Saver");
                 notification.setIcon(PluginIcons.EYEICON);
-
                 notification.setContent(message);
                 Notifications.Bus.notify(notification, projects[0]);
             }
