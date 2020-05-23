@@ -95,28 +95,9 @@ public class EyesSaver extends AnAction {
     }
 
     void fireDialog_20mins() {
-        //pressEscKey();
         NotificationDialog notificationDialog = new NotificationDialog();
         notificationDialog.show();
         //notificationDialog.doValidate();
-    }
-
-    public void pressEscKey() {
-
-        Timer timer = new Timer();
-        ApplicationManager.getApplication().invokeLater(() -> timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    Robot r = new Robot();
-                    int keyCode = KeyEvent.VK_ESCAPE; // escape key
-                    r.keyPress(keyCode);
-                } catch (AWTException e){
-
-                }
-            }
-        }, 0, 20000));
-
     }
 
 }
