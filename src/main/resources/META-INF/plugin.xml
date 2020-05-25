@@ -1,10 +1,10 @@
 <idea-plugin>
-    <id>com.francescaidarocci.EyesSaver</id>
+    <id>com.dharmadeveloper.EyesSaver</id>
     <name>Eyes Saver</name>
-    <vendor email="francescaida.rocci@gmail.com" url="http://www.francescaidarocci.com">Self</vendor>
+    <vendor email="dharmadeveloper108@gmail.com" url="http://www.dharmadeveloper.com">DharmaDev</vendor>
 
     <description><![CDATA[
-    A simple plugin to remind you to look away from the screen after 2 hours of work.
+    A simple plugin to remind you to take care of your eyes and look away from the screen periodically.
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -19,13 +19,14 @@
     <actions>
         <!-- Add your actions here -->
         <group id="EyesSaver.TopMenu"
-               text="_TopMenu"
+               text="_Eyes Saver"
                description="Eyes Saver main class">
             <add-to-group group-id="MainMenu" anchor="last"/>
             <action id="EyesSaver"
-            class="EyesSaver"
-            text="_EyesSaver"
-            description="Eyes saver"/>
+                    class="EyesSaver"
+                    icon="/images/eyessaver.png"
+                    text="_Start"
+                    description="Eyes saver"/>
         </group>
     </actions>
 </idea-plugin>

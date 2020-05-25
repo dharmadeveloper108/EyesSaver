@@ -4,7 +4,7 @@ plugins {
 
 }
 
-group 'com.francescaidarocci'
+group 'com.dharmadeveloper'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -23,6 +23,5 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      First version"""
 }

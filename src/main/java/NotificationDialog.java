@@ -4,10 +4,13 @@ import com.intellij.openapi.ui.ValidationInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.TimerTask;
 import javax.swing.Timer;
 
@@ -84,11 +87,20 @@ public class NotificationDialog extends DialogWrapper {
                     Robot r = new Robot();
                     int keyCode = KeyEvent.VK_ESCAPE; // escape key
                     r.keyPress(keyCode);
+
+                    playNotificationSound();
+
                 } catch (AWTException e){
 
                 }
             }
         },20000);
 
+    }
+
+    public void playNotificationSound() {
+        URL url = getClass().getResource("/sounds/ding.wav");
+        AudioClip clip = Applet.newAudioClip(url);
+        clip.play();
     }
 }
