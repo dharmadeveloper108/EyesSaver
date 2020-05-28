@@ -13,7 +13,6 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <themeProvider id="6afe21b2-c651-4a03-a889-556d099724d4" path="/eyes_saver.theme.json"/>
     </extensions>
 
     <actions>

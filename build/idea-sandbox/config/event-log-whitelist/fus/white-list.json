@@ -1561,8 +1561,12 @@
     "rules" : {
       "event_id" : [ "{enum:newInference|scriptingAutoReloadEnabled}" ],
       "event_data" : {
+        "definition_name" : [ "{enum#__definition_name}" ],
         "enabled" : [ "{enum#boolean}" ],
         "pluginVersion" : [ "{regexp#kotlin_version}" ]
+      },
+      "enums" : {
+        "__definition_name" : [ "KotlinInitScript", "KotlinSettingsScript", "KotlinBuildScript", "MainKtsScript", "Kotlin_Script" ]
       }
     }
   }, {
@@ -2680,7 +2684,7 @@
     "rules" : {
       "event_id" : [ "{enum#_}", "{enum#__event_id}" ],
       "event_data" : {
-        "class" : [ "{util#class}" ],
+        "class" : [ "{util#class_name}" ],
         "count" : [ "{regexp#integer}" ],
         "duration_ms" : [ "{regexp#integer}" ],
         "lang" : [ "{util#lang}" ],
@@ -3204,5 +3208,5 @@
       "version" : "(\\d+\\.?)*\\d+"
     }
   },
-  "version" : "1268"
+  "version" : "1274"
 }
